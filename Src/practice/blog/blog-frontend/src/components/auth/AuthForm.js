@@ -40,6 +40,13 @@ const Footer = styled.div`
   }
 `;
 
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
+
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
@@ -49,7 +56,7 @@ const textMap = {
   register: 'SignUp',
 };
 
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
+const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
   const text = textMap[type];
   return (
     <AuthFormBlock>
@@ -59,7 +66,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
           autoComplete="username"
           name="username"
           placeholder="ID"
-          onChange = {onChange}
+          onChange={onChange}
           value={form.username}
         ></StyledInput>
         <StyledInput
@@ -67,7 +74,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
           name="password"
           placeholder="PASSWORD"
           type="password"
-          onChange = {onChange}
+          onChange={onChange}
           value={form.password}
         ></StyledInput>
         {type === 'register' && (
@@ -76,19 +83,21 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
             name="passwordConfirm"
             placeholder="PASSWORD CONFIRM"
             type="password"
-            onChange = {onChange}
+            onChange={onChange}
             value={form.passwordConfirm}
           ></StyledInput>
         )}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <ButtonWithMarginTop cyan fullWidth>
           {text}
         </ButtonWithMarginTop>
       </form>
       <Footer>
-        {type === 'login'? 
-        (<Link to="/register">Sign Up</Link>)
-        : (<Link to="/login">Log In</Link>)
-        }
+        {type === 'login' ? (
+          <Link to="/register">Sign Up</Link>
+        ) : (
+          <Link to="/login">Log In</Link>
+        )}
       </Footer>
     </AuthFormBlock>
   );
