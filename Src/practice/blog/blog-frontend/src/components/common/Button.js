@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 //import { withRouter } from 'react-router-dom';
 
@@ -36,6 +36,12 @@ const buttonStyle = css`
         background: ${palette.cyan[4]};
       }
     `}
+
+  &:disabled {
+    background: ${palette.gray[3]};
+    color: ${palette.gray[5]};
+    cursor: not-allowed;
+  }
 `;
 
 const StyledButton = styled.button`

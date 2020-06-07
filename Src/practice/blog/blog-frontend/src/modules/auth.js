@@ -92,6 +92,6 @@ const auth = handleActions(
     }),
   },
   initialState,
-);
+  );
 
 export default auth;
