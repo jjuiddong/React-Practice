@@ -4,9 +4,12 @@ import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
 
-import api from'./api';
+import api from './api';
 import jwtMiddleware from './lib/jwtMiddleware';
 //import createFakeData from './createFakeData';
+import serve from 'koa-static';
+import path from 'path';
+import send from 'koa-send';
 
 const { PORT, MONGO_URI } = process.env;
 
@@ -48,6 +51,14 @@ app.use(bodyParser());
 app.use(jwtMiddleware);
 
 app.use(router.routes()).use(router.allowedMethods());
+
+const buildDirectory = path.resolve(__dirname, '../../blog-frontend/build');
+app.use(serve(buildDirectory));
+app.use(async (ctx) => {
+  if (ctx.status === 404 && ctx.path.indexOf('./api') !== 0) {
+    await send(ctx, 'index.html', { root: buildDirectory });
+  }
+});
 
 // app.use(async (ctx, next) => {
 //   console.log(ctx.url);

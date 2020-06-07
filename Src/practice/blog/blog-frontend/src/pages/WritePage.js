@@ -6,10 +6,14 @@ import Responsive from '../components/common/Responsive';
 import EditorContainer from '../containers/write/EditorContainer';
 import TagBoxContainer from '../containers/write/TagBoxContainer';
 import WriteActionButtonsContainer from '../containers/write/WriteActionButtonContainer';
+import {Helmet} from 'react-helmet-async';
 
 const WritePage = () => {
   return (
     <Responsive>
+      <Helmet>
+        <title>Write Post - REACTERS</title>
+      </Helmet>
       <EditorContainer></EditorContainer>
       <TagBoxContainer></TagBoxContainer>
       <WriteActionButtonsContainer></WriteActionButtonsContainer>
